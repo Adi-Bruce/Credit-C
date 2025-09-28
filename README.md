@@ -35,7 +35,7 @@ cred_fraud/
 │ └── fraud_data - Sheet 1.csv
 │
 ├── models/ # Saved trained models & preprocessors
-│ └── lightgbm_model.pkl
+│ ├── lightgbm_model.pkl
 │ └── preprocessor.pkl
 │
 ├── src/
@@ -46,4 +46,3 @@ cred_fraud/
 │
 ├── requirements.txt # Python dependencies
 └── README.md # Project documentation
-
