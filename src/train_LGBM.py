@@ -8,9 +8,8 @@ from imblearn.over_sampling import SMOTE
 from src.data_preprocessing import preprocess_data
 from src.models import lightgbm_model
 
-# ===============================
+
 # Load & Preprocess Data
-# ===============================
 df = pd.read_csv("data/fraud_data - Sheet 1.csv")
 X_train, X_test, y_train, y_test, preprocessor = preprocess_data(df)
 
@@ -18,15 +17,13 @@ X_train, X_test, y_train, y_test, preprocessor = preprocess_data(df)
 X = preprocessor.fit_transform(pd.concat([X_train, X_test]))
 y = pd.concat([y_train, y_test])
 
-# ===============================
+
 # Handle Class Imbalance (SMOTE)
-# ===============================
 smote = SMOTE(sampling_strategy='minority', random_state=42)
 X, y = smote.fit_resample(X, y)
 
-# ===============================
+
 # LightGBM Model with better params
-# ===============================
 model = lightgbm_model(
     n_estimators=500,
     learning_rate=0.05,
@@ -36,9 +33,8 @@ model = lightgbm_model(
     min_gain_to_split=0        # Allow zero-gain splits
 )
 
-# ===============================
+
 # Cross-Validation Function
-# ===============================
 def evaluate_lightgbm(model, X, y, cv, threshold=0.3):
     precision_scores, recall_scores, f1_scores, roc_scores = [], [], [], []
 
@@ -62,9 +58,8 @@ def evaluate_lightgbm(model, X, y, cv, threshold=0.3):
         "ROC-AUC": (np.mean(roc_scores), np.std(roc_scores))
     }
 
-# ===============================
+
 # Run Cross-Validation
-# ===============================
 skf = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)
 scores = evaluate_lightgbm(model, X, y, skf, threshold=0.3)
 
@@ -72,9 +67,8 @@ print("\n===== LightGBM Model Performance =====")
 for metric, (mean, std) in scores.items():
     print(f"{metric}: {mean:.3f} ± {std:.3f}")
 
-# ===============================
+
 # Retrain on full data and save
-# ===============================
 model.fit(X, y)
 
 # Make sure folder exists
