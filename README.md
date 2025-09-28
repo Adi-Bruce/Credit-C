@@ -1,13 +1,13 @@
 # Credit Card Fraud Detection  
 
 This project focuses on detecting fraudulent credit card transactions using various machine learning models.  
-We tested multiple algorithms (Logistic Regression, Random Forest, XGBoost, and LightGBM) with preprocessing, cross-validation, and handling of class imbalance using **SMOTE**.  
+I tested multiple algorithms (Logistic Regression, Random Forest, XGBoost, and LightGBM) with preprocessing, cross-validation, and handling of class imbalance using **SMOTE**.  
 
 The **LightGBM model** gave the best performance with high precision, recall, and ROC-AUC.
 
 ## Why We Avoided Ensembling  
 
-Initially, we considered **ensemble methods** like Voting Classifiers or Stacking.  
+Initially, I considered **ensemble methods** like Voting Classifiers or Stacking.  
 However, after experiments, **LightGBM alone consistently outperformed all other models** in terms of precision, recall, and ROC-AUC.  
 
 Adding ensembling:  
